@@ -77,11 +77,11 @@ $ makeblastdb -in virus_db_090217.fa -dbtype nucl
 ```
 export PERL5LIB=/users/xchen/.cpan/build/
 export PATH=$PATH:/users/xchen/VIcaller/Tools/bowtie2-2.2.7/
-# human_genome = /users/xchen/VIcaller/Database/Human/human_genome_hg38/ hg38.fa
-# human_genome_tophat = /users/xchen/VIcaller/Database/Human/human_genome_hg38/ hg38.fa
-# virus_genome = /users/xchen/VIcaller/Database/Virus/virus_db_090217/virus_db_090217.fa          
-# virus_taxonomy = /users/xchen/VIcaller/Database/Virus/virus_db_090217/virus_db_090217.taxonomy
-# virus_list = /users/xchen/VIcaller/Database/Virus/virus_db_090217/virus_db_090217.virus_list
+# human_genome = /users/xchen/VIcaller/Database/Human/hg38.fa
+# human_genome_tophat = /users/xchen/VIcaller/Database/hg38.fa
+# virus_genome = /users/xchen/VIcaller/Database/Virus/virus_db_090217.fa          
+# virus_taxonomy = /users/xchen/VIcaller/Database/Virus/virus_db_090217.taxonomy
+# virus_list = /users/xchen/VIcaller/Database/Virus/virus_db_090217.virus_list
 # vector_db = /gpfs2/dli5lab/CAVirus/Database/Vector/Vector.fa
 # cell_line = /users/xchen/VIcaller/Database/cell_line.list
 # bowtie_d = /users/xchen/VIcaller/Tools/bowtie2-2.2.7/
