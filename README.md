@@ -5,7 +5,7 @@ A software to detect virome-wide viral integrations
 Viral Integration caller (VIcaller) is a bioinformatics tool designed for identifying viral integration events using high-throughput sequencing (HTS) data. VIcaller is developed under Linux platform. It uses both FASTQ files or aligned BAM files as input. It also supports both single-end and paired-end reads. VIcaller contains one main Perl script, VIcaller.pl, that include three main functions: 1) detect, which will detect virome-wide candidate viruses and integration events; 2) validate, which will perform the in silico validation on those candidate viral integrations; 3) calculate, which will calculate the integration allele fraction. We also generated a comprehensive viral reference genome library with 411,195 unique whole and partial genomes, covering all six virus taxonomic classes. The viral reference genome library  also comes with a taxonomy database in a defined format that give the virus name, etc. 
 
 ## 2 Availability
-VIcaller is an open-source software. VIcaller.v1.1 source code is also available at www.uvm.edu/genomics/software/VIcaller. You need to get the virome-wide library and vector database at www.uvm.edu/genomics/software/VIcaller.
+VIcaller is an open-source software. VIcaller.v1.1 source code is also available at http://www.uvm.edu/genomics/software/VIcaller.html. You need to get the virome-wide library and vector database at http://www.uvm.edu/genomics/software/VIcaller.html.
 
 ## 3 VIcaller installation
 ### 3.1 Unzip the VIcaller installer
@@ -178,7 +178,7 @@ $ awk '{if ($7!="Chr.")print$7"\t"$17"\t.\tA\tT\t."}' seq.output
 Xun Chen, Jason Kost, Arvis Sulovari, Nathalie Wong, Winnie S. Liang, Jian Cao, and Dawei Li. A virome-wide clonal integration analysis platform for discovering cancer viral etiologies. Under review.
 
 ## Download
-www.uvm.edu/genomics/software/VIcaller
+http://www.uvm.edu/genomics/software/VIcaller.html
 
 ## Copyright
 VIcaller is licensed under the Creative Commons Attribution-NonCommercial 4.0 International license. It may be used for non-commercial use only. For inquiries about a commercial license, please contact the corresponding author at dawei.li@uvm.edu or The University of Vermont Innovations at innovate@uvm.edu.
