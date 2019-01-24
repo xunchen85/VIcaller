@@ -5,7 +5,7 @@ A software to detect virome-wide viral integrations
 Viral Integration caller (VIcaller) is a bioinformatics tool designed for identifying viral integration events using high-throughput sequencing (HTS) data. VIcaller is developed under Linux platform. It uses both FASTQ files or aligned BAM files as input. It also supports both single-end and paired-end reads. VIcaller contains one main Perl script, VIcaller.pl, that include three main functions: 1) detect, which will detect virome-wide candidate viruses and integration events; 2) validate, which will perform the in silico validation on those candidate viral integrations; 3) calculate, which will calculate the integration allele fraction. We also generated a comprehensive viral reference genome library with 411,195 unique whole and partial genomes, covering all six virus taxonomic classes. The viral reference genome library  also comes with a taxonomy database in a defined format that give the virus name, etc. 
 
 ## 2 Availability
-VIcaller is an open-source software. VIcaller.v1.1 source code is available at www.uvm.edu/genomics/software/VIcaller, virome-wide library is also available here, and the human reference genome (GRCh38) can be obtained from UCSC website.
+VIcaller is an open-source software. VIcaller.v1.1 source code is also available at www.uvm.edu/genomics/software/VIcaller. You need to get the virome-wide library and vector database at www.uvm.edu/genomics/software/VIcaller.
 
 ## 3 VIcaller installation
 ### 3.1 Unzip the VIcaller installer
@@ -54,8 +54,11 @@ $ cpan IO::Zlib
 ```
 
 ###	3.3 Prepare databases
-#### Index human reference genome using BWA, Bowtie2, and BLAST+ separately:
+#### Obtain and index human reference genome using BWA, Bowtie2, and BLAST+ separately:
 ```
+$ cd VIcaller/Database/Human/
+$ wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+$ gunzip hg38.fa.gz 
 $ bwa index -a bwtsw hg38.fa
 $ bowtie2-build hg38.fa hg38.fa
 $ makeblastdb -in hg38.fa -dbtype nucl
@@ -63,9 +66,10 @@ $ makeblastdb -in hg38.fa -dbtype nucl
 
 #### Index viral database using BWA, Bowtie2, and BLAST+ separately:
 ```
-$ bwa index -a bwtsw hg38.fa
-$ bowtie2-build hg38.fa hg38.fa
-$ makeblastdb -in hg38.fa -dbtype nucl
+$ cd VIcaller/Database/Virus/
+$ bwa index -a bwtsw virus_db_090217.fa
+$ bowtie2-build virus_db_090217.fa virus_db_090217.fa
+$ makeblastdb -in virus_db_090217.fa -dbtype nucl
 ```
 
 ### 3.4 Prepare the VIcaller config file
@@ -166,10 +170,8 @@ $ awk '{if ($7!="Chr.")print$7"\t"$17"\t.\tA\tT\t."}' seq.output
 ### 6.4 Can I use the published tools that were designed for detecting transposable element insertions to identify virome-wide integrations?
         VIcaller uses the reads that are commonly used in transposable element insertion and other structural variation detection tools. However, because VIcaller is specifically designed to identify virome-wide integrations, it has significant advantages over alignment-based transposable element insertion detection tools for viral integration analysis, which are designed to extract and mainly use (human’s) anomalous reads specifically. For example, 1) VIcaller supports the use of virome-wide library as the reference to detect any characterized viruses, while most transposable element detection tools use transposable element sequences as the reference; and 2) VIcaller implements viral integration-specific quality control procedures and implements additional steps to in silico verify detected viral integrations. We have tried to compare VIcaller with other transposable element insertion detection software, e.g., MELT. MELT failed to run in a virome-wide fashion after we replaced MELT’s default consensus transposable element reference sequences with our virome-wide database. We further tested whether MELT was able to detect simulated candidate viral integrations, and we found that although MELT did run, it was not able to detect any of these integrations.
 
-### 6.5 Where to get the human reference genome? 
-        You can download hg38 here: http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/. It is recommended to use the latest hg38.fa.gz file for indexing.
 
-### 6.6 Can I use other virome-wide libraries?
+### 6.5 Can I use other virome-wide libraries?
         You can use other viral databases as the reference. However, the final output may not include the viral names or other taxonomy information. The reads that multiple-mapped different viral sequences from the same virus may not be efficiently recovered for the detection of viral integrations.
 
 ## Citation
