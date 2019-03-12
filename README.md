@@ -1,4 +1,4 @@
-# VIcaller
+# VIcaller v1.1
 A software to detect virome-wide viral integrations
 
 ## 1 Introduction
