@@ -175,7 +175,7 @@ $ awk '{if ($7!="Chr.")print$7"\t"$17"\t.\tA\tT\t."}' seq.output
         You can use other viral databases as the reference. However, the final output may not include the viral names or other taxonomy information. The reads that multiple-mapped different viral sequences from the same virus may not be efficiently recovered for the detection of viral integrations.
 
 ## Citation
-Xun Chen, Jason Kost, Arvis Sulovari, Nathalie Wong, Winnie S. Liang, Jian Cao, and Dawei Li. A virome-wide clonal integration analysis platform for discovering cancer viral etiologies. Under review.
+Xun Chen, Jason Kost, Arvis Sulovari, Nathalie Wong, Winnie S. Liang, Jian Cao, and Dawei Li. A virome-wide clonal integration analysis platform for discovering cancer viral etiologies. Genome Research. 2019. In Press
 
 ## Download
 http://www.uvm.edu/genomics/software/VIcaller.html
