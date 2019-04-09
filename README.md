@@ -170,10 +170,12 @@ $ awk '{if ($7!="Chr.")print$7"\t"$17"\t.\tA\tT\t."}' seq.output
 ### 6.4 Can I use the published tools that were designed for detecting transposable element insertions to identify virome-wide integrations?
         VIcaller uses the reads that are commonly used in transposable element insertion and other structural variation detection tools. However, because VIcaller is specifically designed to identify virome-wide integrations, it has significant advantages over alignment-based transposable element insertion detection tools for viral integration analysis, which are designed to extract and mainly use (human’s) anomalous reads specifically. For example, 1) VIcaller supports the use of virome-wide library as the reference to detect any characterized viruses, while most transposable element detection tools use transposable element sequences as the reference; and 2) VIcaller implements viral integration-specific quality control procedures and implements additional steps to in silico verify detected viral integrations. We have tried to compare VIcaller with other transposable element insertion detection software, e.g., MELT. MELT failed to run in a virome-wide fashion after we replaced MELT’s default consensus transposable element reference sequences with our virome-wide database. We further tested whether MELT was able to detect simulated candidate viral integrations, and we found that although MELT did run, it was not able to detect any of these integrations.
 
-
 ### 6.5 Can I use other virome-wide libraries?
         You can use other viral databases as the reference. However, the final output may not include the viral names or other taxonomy information. The reads that multiple-mapped different viral sequences from the same virus may not be efficiently recovered for the detection of viral integrations.
 
+### 6.6 Which human renference build is used for the test output file?
+        We previously used hg19 reference build to generate the test output file and to prepare the input BAM files. Thus, you should use hg19 to run the test data in BAM format or if you want to compare with the example output file.
+        
 ## Citation
 Xun Chen, Jason Kost, Arvis Sulovari, Nathalie Wong, Winnie S. Liang, Jian Cao, and Dawei Li. A virome-wide clonal integration analysis platform for discovering cancer viral etiologies. Genome Research. 2019 Mar. DOI: 10.1101/gr.242529.118
 
