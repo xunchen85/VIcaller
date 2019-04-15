@@ -18,6 +18,7 @@ open S1,">$ARGV[5]"||di("di too");
 while($read_name=<F1>){
    my @read1=split /\|/, $read_name;
    $read_name=~s/^@//;
+   $read_name=~s/\s+$//;                  #### revised on 4/15/2019
    $read=$read_name;
    my @temp11=split /\s+/, $read;
    $read_name=$temp11[0];
