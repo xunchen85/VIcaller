@@ -445,9 +445,14 @@ if ($function eq "detect"){
 } elsif ($function eq "calculate"){
   my $position1=$Position-10000;
   my $position2=$Position+10000;
-  if (defined($Index_sort)){
+
+  if (${File_suffix_bam} =~ "fq" || ${File_suffix_bam} =~ "fastq") {
+    system ("${samtools_d}samtools sort -@ $thread_1 ${input_sampleID}_h.bam -o ${input_sampleID}_s_h.bam");
+    system ("${samtools_d}samtools index ${input_sampleID}_s_h.bam");
+    system ("${samtools_d}samtools view ${input_sampleID}_s_h.bam ${Chr}:${position1}-${position2} >${input_sampleID}_${Chr}_${Position}_h.sort.sam");
+  } elsif (${File_suffix_bam} =~ ".bam" && defined($Index_sort)){
     system ("${samtools_d}samtools view ${input_sampleID}${File_suffix_bam} ${Chr}:${position1}-${position2} >${input_sampleID}_${Chr}_${Position}_h.sort.sam");
-  } else {
+  } elsif (${File_suffix_bam} =~ ".bam" && !defined($Index_sort)) {
     system ("${samtools_d}samtools sort -@ $thread_1 ${input_sampleID}${File_suffix_bam} -o ${input_sampleID}_s${File_suffix_bam}");
     system ("${samtools_d}samtools index ${input_sampleID}_s${File_suffix_bam}");
     system ("${samtools_d}samtools view ${input_sampleID}_s${File_suffix_bam} ${Chr}:${position1}-${position2} >${input_sampleID}_${Chr}_${Position}_h.sort.sam");
