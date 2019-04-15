@@ -1055,6 +1055,18 @@ sub convert_bamtofastq {
 
 ##### validate function
 sub v_obtain_seq {
+  open VIRUS_f2, "${input_sampleID}.virus_f2";
+  open VIRUS_f3, ">${input_sampleID2}.virus_f2";
+  while (my $tmp_v2=<VIRUS_f2>) {
+    my @tmp_v2 =split /\s+/, $tmp_v2;
+    my $tmp_v3 = $tmp_v2[15]."_".$tmp_v2[32]."_".$tmp_v2[33]."_".$tmp_v2[34]."_".$tmp_v2[35];
+    if ($input_sampleID2 eq $tmp_v3) {
+      print VIRUS_f3 "$tmp_v2";
+      last;
+    }
+  }
+  close VIRUS_f2;
+  close VIRUS_f3;
   system ("perl ${directory}Scripts/Extract_specific_loci_final_reads.pl ${input_sampleID}_f2 ${input_sampleID2}.virus_f2 >${input_sampleID2}.information");
   my $cmd=q(awk '{print$8}');
   system ("$cmd ${input_sampleID2}.information |sort |uniq >${input_sampleID2}.id");
@@ -1161,7 +1173,7 @@ sub v_index_GI {
     mkdir ${directory}."Database/GI/";
   }
   if (!(-e ${directory}."Database/GI/".${GI}.".fa")){
-    system ("perl /gpfs2/dli5lab/CAVirus/Scripts/Extract_fasta.pl $GI $virus_genome >${directory}Database/GI/${GI}.fa");
+    system ("perl ${directory}Scripts/Extract_fasta.pl $GI $virus_genome >${directory}Database/GI/${GI}.fa");
     system ("${bwa_d}bwa index -a bwtsw ${directory}Database/GI/${GI}.fa");
     system ("${blastn_d}/bin/makeblastdb -in ${directory}Database/GI/${GI}.fa -dbtype nucl");
   }
