@@ -1065,7 +1065,7 @@ sub v_obtain_seq {
   open VIRUS_f3, ">${input_sampleID2}.virus_f2";
   while (my $tmp_v2=<VIRUS_f2>) {
     my @tmp_v2 =split /\s+/, $tmp_v2;
-    my $tmp_v3 = $tmp_v2[15]."_".$tmp_v2[32]."_".$tmp_v2[33]."_".$tmp_v2[34]."_".$tmp_v2[35];
+    my $tmp_v3 = $tmp_v2[15]."_".$tmp_v2[31]."_".$tmp_v2[32]."_".$tmp_v2[33]."_".$tmp_v2[34]."_".$tmp_v2[35];
     if ($input_sampleID2 eq $tmp_v3) {
       print VIRUS_f3 "$tmp_v2";
       last;
