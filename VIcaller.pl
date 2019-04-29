@@ -85,7 +85,7 @@ GetOptions(
 
            "F|File_suffix_bam=s" => \$File_suffix_bam,
 	   "I|Index_sort" => \$Index_sort,
-	   "C|Chr" => \$Chr,
+	   "C|Chr=s" => \$Chr,
            "P|Position=i" => \$Position,
            "B|Breakpoint=i" => \$Breakpoint,
            "N|Number_reads=i" => \$Number_reads,
