@@ -95,7 +95,7 @@ export PATH=$PATH:/users/xchen/VIcaller/Tools/bowtie2-2.2.7/
 # SE_MEI_d = /users/xchen/VIcaller/Tools/SE-MEI/
 # hydra_d = /users/xchen/VIcaller/Tools/Hydra-Version-0.5.3/
 # blat_d = /users/xchen/bin/x86_64/
-# blastn_d = /users/xchen/VIcaller/Tools/ncbi-blast-2.2.30+-src/
+# blastn_d = /users/xchen/VIcaller/Tools/ncbi-blast-2.2.30+-src/bin/
 ```
 
 #### Check the generated VIcaller.config file
