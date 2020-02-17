@@ -1181,7 +1181,7 @@ sub v_index_GI {
   if (!(-e ${directory}."Database/GI/".${GI}.".fa")){
     system ("perl ${directory}Scripts/Extract_fasta.pl $GI $virus_genome >${directory}Database/GI/${GI}.fa");
     system ("${bwa_d}bwa index -a bwtsw ${directory}Database/GI/${GI}.fa");
-    system ("${blastn_d}/bin/makeblastdb -in ${directory}Database/GI/${GI}.fa -dbtype nucl");
+    system ("${blastn_d}makeblastdb -in ${directory}Database/GI/${GI}.fa -dbtype nucl");
   }
 }
 
