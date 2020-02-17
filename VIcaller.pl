@@ -1126,9 +1126,9 @@ sub v_blat_validate {
 }
 
 sub v_blastn_validate {
-  system ("${blastn_d}bin/blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db ${directory}Database/GI/${GI}.fa >${input_sampleID2}_aligned_target.out");
-  system ("${blastn_d}bin/blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db $virus_genome >${input_sampleID2}_aligned_vicaller.out");
-  system ("${blastn_d}bin/blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db $human_genome >${input_sampleID2}_aligned_human.out");
+  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db ${directory}Database/GI/${GI}.fa >${input_sampleID2}_aligned_target.out");
+  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db $virus_genome >${input_sampleID2}_aligned_vicaller.out");
+  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db $human_genome >${input_sampleID2}_aligned_human.out");
 }
 
 sub v_convert{
