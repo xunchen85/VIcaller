@@ -6,10 +6,9 @@ use strict;
 my $line="";
 my @line=();
 my %taxo=();
-my $Main_folder=$ARGV[1];
-$Main_folder="/users/x/c/xchen19/Checking_integration_reads030917/";
-open DB,"${Main_folder}Scripts/virus_list_for_virus_c_contamination_change_HHV4_type_2_to_HHV4";
-while(<DB>){
+my $virus_list=$ARGV[1];
+open F2,"$virus_list";
+while(<F2>){
  @line=split;
  $taxo{$line[0]}=$line[1];
 }
