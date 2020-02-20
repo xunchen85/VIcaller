@@ -414,7 +414,7 @@ if ($function eq "detect"){
  ##### delete files
  system ("rm ${input_sampleID}.integration");
  system ("rm ${input_sampleID}.fasta");
- system ("rm ${input_sampleID}_summary");
+ system ("rm ${input_sampleID}_summary*");
  system ("rm ${input_sampleID}.f");
  system ("rm ${input_sampleID}_f");
  system ("rm ${input_sampleID}_f22");
@@ -1126,9 +1126,9 @@ sub v_blat_validate {
 }
 
 sub v_blastn_validate {
-  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db ${directory}Database/GI/${GI}.fa >${input_sampleID2}_aligned_target.out");
-  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db $virus_genome >${input_sampleID2}_aligned_vicaller.out");
-  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -word_size 10 -evalue 1e-5 -outfmt 6 -db $human_genome >${input_sampleID2}_aligned_human.out");
+  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -num_threads $threads -word_size 10 -evalue 1e-5 -outfmt 6 -db ${directory}Database/GI/${GI}.fa >${input_sampleID2}_aligned_target.out");
+  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -num_threads $threads -word_size 10 -evalue 1e-5 -outfmt 6 -db $virus_genome >${input_sampleID2}_aligned_vicaller.out");
+  system ("${blastn_d}blastn -query ${input_sampleID2}_aligned_both.fas -num_threads $threads -word_size 10 -evalue 1e-5 -outfmt 6 -db $human_genome >${input_sampleID2}_aligned_human.out");
 }
 
 sub v_convert{
@@ -1139,19 +1139,19 @@ sub v_convert{
     system ("perl ${directory}Scripts/Filtered_temp2.pl ${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection2 >${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection21");
     system ("perl ${directory}Scripts/Organize_blast_all_virus.pl ${input_sampleID2}_aligned_$groups[$i] >${input_sampleID2}_aligned_$groups[$i].out2");
     system ("perl ${directory}Scripts/Organize_blat_all_virus.pl ${input_sampleID2}_aligned_$groups[$i] >${input_sampleID2}_aligned_$groups[$i].psl2");
-    my $cmd=q(awk '{$4="";print$2" "$0}');
-    system ("$cmd ${input_sampleID2}_aligned_$groups[$i]_default2_infection21 >${input_sampleID2}_aligned_$groups[$i]_default2_infection22");
-    system ("perl ${directory}Scripts/Replace_virus_name.pl ${input_sampleID2}_aligned_$groups[$i]_default2_infection22 $directory >${input_sampleID2}_aligned_$groups[$i]_default2_infection222");
+    my $cmd_v=q(awk '{$4="";print$2" "$0}');
+    system ("$cmd_v ${input_sampleID2}_aligned_$groups[$i]_default2_infection21 | sed 's/  / /' >${input_sampleID2}_aligned_$groups[$i]_default2_infection22");
+    system ("perl ${directory}Scripts/Replace_virus_name.pl ${input_sampleID2}_aligned_$groups[$i]_default2_infection22 $virus_list >${input_sampleID2}_aligned_$groups[$i]_default2_infection222");
     system ("perl ${directory}Scripts/Summary_chimeric_split_reads_final031417.pl ${input_sampleID2} ${input_sampleID2}_aligned_$groups[$i]_default2_infection222 >${input_sampleID2}_aligned_$groups[$i]_default2_infection_CS");
-    system ("$cmd ${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection21 >${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection22");
-    system ("perl ${directory}Scripts/Replace_virus_name.pl ${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection22 $directory >${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection222");
+    system ("$cmd_v ${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection21 | sed 's/  / /' >${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection22");
+    system ("perl ${directory}Scripts/Replace_virus_name.pl ${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection22 $virus_list >${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection222");
     system ("perl ${directory}Scripts/Summary_chimeric_split_reads_final031417.pl ${input_sampleID2} ${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection222 >${input_sampleID2}_aligned_$groups[$i]_notdefault2_infection_CS");
-    $cmd=q(awk '{print$2" "$0}');
-    system ("$cmd ${input_sampleID2}_aligned_$groups[$i].psl2 >${input_sampleID2}_aligned_$groups[$i].psl3");
-    system ("perl ${directory}Scripts/Replace_virus_name.pl ${input_sampleID2}_aligned_$groups[$i].psl3 $directory >${input_sampleID2}_aligned_$groups[$i].psl222");
+    my $cmd_v2=q(awk '{print$2" "$0}');
+    system ("$cmd_v2 ${input_sampleID2}_aligned_$groups[$i].psl2 | sed 's/  / /' >${input_sampleID2}_aligned_$groups[$i].psl3");
+    system ("perl ${directory}Scripts/Replace_virus_name.pl ${input_sampleID2}_aligned_$groups[$i].psl3 $virus_list >${input_sampleID2}_aligned_$groups[$i].psl222");
     system ("perl ${directory}Scripts/Summary_chimeric_split_reads_final031417.pl ${input_sampleID2} ${input_sampleID2}_aligned_$groups[$i].psl222 >${input_sampleID2}_aligned_$groups[$i].psl_CS");
-    system ("$cmd ${input_sampleID2}_aligned_$groups[$i].out2 >${input_sampleID2}_aligned_$groups[$i].out3");
-    system ("perl ${directory}Scripts/Replace_virus_name.pl ${input_sampleID2}_aligned_$groups[$i].out3 $directory >${input_sampleID2}_aligned_$groups[$i].out222");
+    system ("$cmd_v2 ${input_sampleID2}_aligned_$groups[$i].out2 | sed 's/  / /' >${input_sampleID2}_aligned_$groups[$i].out3");
+    system ("perl ${directory}Scripts/Replace_virus_name.pl ${input_sampleID2}_aligned_$groups[$i].out3 $virus_list >${input_sampleID2}_aligned_$groups[$i].out222");
     system ("perl ${directory}Scripts/Summary_chimeric_split_reads_final_blast031417.pl ${input_sampleID2} ${input_sampleID2}_aligned_$groups[$i].out222 >${input_sampleID2}_aligned_$groups[$i].out_CS");
   }
 }
@@ -1165,13 +1165,13 @@ sub v_summary {
   system ("perl ${directory}Scripts/Extract_specific_loci_final_visualization.pl ${input_sampleID}_f2 ${input_sampleID2}.virus_f2 >${input_sampleID2}.visualization");
   system ("paste ${input_sampleID2}.default_CS ${input_sampleID2}.notdefault_CS ${input_sampleID2}.psl_CS ${input_sampleID2}.out_CS >${input_sampleID2}.CS2");
   system ("perl ${directory}Scripts/Summary_by_read_final.pl ${input_sampleID2} >${input_sampleID2}.CS3");
-  system ("rm ${input_sampleID2}_aligned*");
-  system ("rm ${input_sampleID2}.CS2");
-  system ("rm ${input_sampleID2}_CS2");
-  system ("rm ${input_sampleID2}_error");
-  system ("rm ${input_sampleID2}.id");
-  system ("rm ${input_sampleID2}.information");
-  system ("rm ${input_sampleID2}.*_CS"); 
+#  system ("rm ${input_sampleID2}_aligned*");
+#  system ("rm ${input_sampleID2}.CS2");
+#  system ("rm ${input_sampleID2}_CS2");
+#  system ("rm ${input_sampleID2}_error");
+#  system ("rm ${input_sampleID2}.id");
+#  system ("rm ${input_sampleID2}.information");
+#  system ("rm ${input_sampleID2}.*_CS"); 
 }
 
 sub v_index_GI {
@@ -1256,7 +1256,7 @@ sub prtUsa {
   print "Examples for validating each candidate viral integration:\n";
   print "	perl VIcaller.pl validate -i seq -S seq_1_24020575_24020787_human_papillomavirus_type_218931404 -G 218931404 -V human_papillomavirus_type\n\n";
   print "Examples for calculating integration allele fraction:\n";
-  print "	perl VICaller.pl calculate -i seq -f .bam -S -C 1 -P 24020575 -B 2 -N 20\n\n";
+  print "	perl VICaller.pl calculate -i seq -F .bam -C 1 -P 24020575 -B 2 -N 20\n\n";
 }
 
 ##### print error message with the input data;
