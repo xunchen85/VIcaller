@@ -9,6 +9,7 @@
 ############# updates
 #
 # Version v1.1:
+#	02/20/2020	Debug the validate function;
 #	04/15/2019	Debug the validate function;
 #	01/10/2019	Debug VIcaller using the RNA-seq FASTQ file as input;
 # 	01/08/2019	Remove the function of installing depedent tools due to the links to get the installers expired;
