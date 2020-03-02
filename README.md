@@ -29,10 +29,10 @@ d) Check or install the listed Perl libraries using cpan, cpanm or other methods
 •	BLAST+ (default version: v2.2.30): http://mirrors.vbi.vt.edu/mirrors/ftp.ncbi.nih.gov/blast/executables/blast%2B/2.2.30/  
 •	SAMtools (default version: v1.6): https://sourceforge.net/projects/samtools/  
 •	HYDRA (default version: 0.5.3): https://code.google.com/archive/p/hydra-sv/downloads  
-•	NGS QC Toolkit (default version: v2.3.3): http://genomic-identity.wikidot.com/install-blat  
+•	NGS QC Toolkit (default version: v2.3.3): the installer can be found under the VIcaller/Tools/ folder  
 a) Copy the script “TrimmingReads_sanger.pl” under the VIcaller/Scripts/ folder to the installed NGSQCToolkit_v2.3.3/Trimming/ folder  
 •	FastUniq (Default version: v1.1): https://sourceforge.net/projects/fastuniq/  
-•	SE-MEI (modified): https://github.com/dpryan79/SE-MEI (original version), the modified version can be found under the VIcaller/Scripts/ folder  
+•	SE-MEI (modified): https://github.com/dpryan79/SE-MEI (original version), the modified version can be found under the VIcaller/Tools/ folder  
 a) Copy the modified SE-MEI installer (SE-MEI-master.tar.gz) under the VIcaller/Scripts/ folder to the VIcaller/Tools/ folder  
 b) Install the modified SE-MEI tool follow the README file  
 •	RepeatMasker (default version: v4.0.5):  
