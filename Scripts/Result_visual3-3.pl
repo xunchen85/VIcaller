@@ -38,7 +38,7 @@ while(<SF>){
            }
 
 ############################# open split reads;
-open SOFT,"$ARGV[1]_sf.fuq";
+open SOFT,"$ARGV[1]_1sf.fuq";
 my $seq_name="";
 my $seq="";
 while(<SOFT>){
