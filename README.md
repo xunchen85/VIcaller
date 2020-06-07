@@ -127,7 +127,7 @@ c) RNA alignment data in bam format  (Note: Human reference genome should be the
 ```
 $ perl VIcaller.pl detect -d RNA-seq -i seq -f .bam -s paired-end -t 12
 ```
-### 4.2 Validate candidate viral integrations
+### 4.2 Validate candidate viral integrations (will remove almost all false viral integrations detected at the "detect" step)
 #### Command line
 ```
 $ perl VIcaller.pl validate [arguments]
